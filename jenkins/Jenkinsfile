@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') {
             agent {
@@ -33,7 +36,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pyinstaller --onefile sources/add2vals.py'
+                sh '/root/.pyenv/shims/pyinstaller --onefile sources/add2vals.py'
             }
             post {
                 success {
